@@ -32,12 +32,12 @@ typedef union {
 
 typedef struct {
   char campoNombreCliente[MAX];
-  char lugarReservacion[MAX];
-  char diaLlegada[LONGITUD_DIA_LLEGADA];
-  char diaPartida[LONGITUD_DIA_PARTIDA];
-  unsigned int numeroNinios;
-  unsigned int numeroAdultos;
-  unsigned int costoEstancia;
+  char campoLugarReservacion[MAX];
+  char campoDiaLlegada[LONGITUD_DIA_LLEGADA];
+  char campoDiaPartida[LONGITUD_DIA_PARTIDA];
+  unsigned int campoNumeroNinios;
+  unsigned int campoNumeroAdultos;
+  unsigned int campoCostoEstancia;
   Suite habitacionSelecta;
 } Reservacion;
 
