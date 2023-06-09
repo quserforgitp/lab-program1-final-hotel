@@ -47,7 +47,7 @@ int pedirOpcion(void); //✅
 void altaReservacion(Reservacion* rs); //🔨
 void reporteReservacion(void);
 
-void pedirNombre(char campoNombre[]); //🔨
+void pedirNombre(char campoNombre[]); //✅
 void pedirLugarReservacion(void);
 void pedirDiaLlegada(void);
 void pedirDiaPartida(void);
