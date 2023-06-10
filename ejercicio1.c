@@ -80,8 +80,12 @@ int main() {
       altaReservacion(&reservacion);
       break;
     case '2':
-    puts("reporteReservacion()");
+      puts("reporteReservacion()");
       //reporteReservacion();
+      break;
+    case '3':
+      puts("saliendo del programa...");
+      salirPrograma(0);
       break;
     default:
       Error();
