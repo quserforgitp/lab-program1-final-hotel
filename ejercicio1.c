@@ -52,13 +52,13 @@ void pedirLugarReservacion(char campoLugarReservacion[]); //✅
 void pedirDiaLlegada(char campoDiaLlegada[]); //✅
 void pedirDiaPartida(char campoDiaPartida[]); //✅
 void pedirNumeroAdultos(void);
-void pedirNumeroNinios(void);
+void pedirNumeroNinios(int *campoNumeroNinios); //✅
 void pedirTipoHabitacion(void);
 void calcularCostoTotalDolares(unsigned int noches,
                                Suite tipoHabitacion);
 void Error(void); //✅
 void salirPrograma(int codigoSalida); //✅
-void eliminarSaltoLinea(char nombreCampo[]); //🔨
+void eliminarSaltoLinea(char nombreCampo[]); //✅
 
 /* INICIO DEL PROGRAMA */
 int main() {
@@ -140,15 +140,18 @@ void altaReservacion(Reservacion* rs)
   pedirLugarReservacion(rs->campoLugarReservacion);
   pedirDiaLlegada(rs->campoDiaLlegada);
   pedirDiaPartida(rs->campoDiaPartida);
+  pedirNumeroNinios(&(rs->campoNumeroNinios));
   // DEBUG
   printf("debug nombre:'%s'\n\
           reservacion:'%s'\n\
           dia llegada:'%s'\n\
-          dia partida:'%s'\n",
+          dia partida:'%s'\n\
+          numero ninios: %d\n",
             rs->campoNombreCliente,
             rs->campoLugarReservacion,
             rs->campoDiaLlegada,
-            rs->campoDiaPartida);
+            rs->campoDiaPartida,
+            rs->campoNumeroNinios);
 }
 
 void pedirNombre(char campoNombre[])
@@ -179,7 +182,15 @@ void pedirDiaPartida(char campoDiaPartida[])
   eliminarSaltoLinea(campoDiaPartida);
 }
 
+void pedirNumeroNinios(int *campoNumeroNinios)
+{
+  puts("Dame el numero de ninios que se van a hospedar: ");
+  scanf("%d", campoNumeroNinios);
+  getchar();//consumir salto de linea
+}
+
 void eliminarSaltoLinea(char nombreCampo[])
 {
   nombreCampo[strcspn(nombreCampo, "\n")] = '\0';
 }
+
