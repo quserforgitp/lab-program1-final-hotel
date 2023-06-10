@@ -48,7 +48,7 @@ void altaReservacion(Reservacion* rs); //🔨
 void reporteReservacion(void);
 
 void pedirNombre(char campoNombre[]); //✅
-void pedirLugarReservacion(void);
+void pedirLugarReservacion(char campoLugarReservacion[]); //🔨
 void pedirDiaLlegada(void);
 void pedirDiaPartida(void);
 void pedirNumeroAdultos(void);
@@ -132,12 +132,18 @@ void altaReservacion(Reservacion* rs)
 {
   
   pedirNombre(rs->campoNombreCliente);
-  puts("mostrando nombre y apellidos: ");
-  printf("%s", rs->campoNombreCliente);
+  pedirLugarReservacion(rs->campoLugarReservacion);
+  printf("debug nombre:%s reservacion:%s\n",rs->campoNombreCliente,rs->campoLugarReservacion);
 }
 
 void pedirNombre(char campoNombre[])
 {
   puts("Dame el nombre y apellidos del cliente:");
   fgets(campoNombre,MAX-1,stdin);
+}
+
+void pedirLugarReservacion(char campoLugarReservacion[])
+{
+  puts("Dame el lugar de la reservacion: ");
+  fgets(campoLugarReservacion,MAX-1,stdin);
 }
