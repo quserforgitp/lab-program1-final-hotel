@@ -58,6 +58,7 @@ void calcularCostoTotalDolares(unsigned int noches,
                                Suite tipoHabitacion);
 void Error(void); //✅
 void salirPrograma(int codigoSalida); //✅
+void eliminarSaltoLinea(char nombreCampo[]); //🔨
 
 /* INICIO DEL PROGRAMA */
 int main() {
@@ -175,4 +176,9 @@ void pedirDiaPartida(char campoDiaPartida[])
   puts("Dame el dia de partida en formato dia/mes/anio: ");
   fgets(campoDiaPartida,LONGITUD_DIA_PARTIDA,stdin);
   campoDiaPartida[strcspn(campoDiaPartida, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
+}
+
+void eliminarSaltoLinea(char nombreCampo[])
+{
+  nombreCampo[strcspn(nombreCampo, "\n")] = '\0';
 }
