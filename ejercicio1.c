@@ -139,6 +139,7 @@ void altaReservacion(Reservacion* rs)
   pedirDiaLlegada(rs->campoDiaLlegada);
   pedirDiaPartida(rs->campoDiaPartida);
   pedirNumeroNinios(&(rs->campoNumeroNinios));
+  pedirNumeroAdultos(&(rs->campoNumeroAdultos));
   // DEBUG
   printf("debug nombre:'%s'\n\
           reservacion:'%s'\n\
