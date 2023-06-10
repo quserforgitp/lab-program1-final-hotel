@@ -127,8 +127,6 @@ O realizo una accion inesperada!!");
 }
 
 void salirPrograma(int codigoSalida)
-
-
 {
   exit(codigoSalida);
 }
