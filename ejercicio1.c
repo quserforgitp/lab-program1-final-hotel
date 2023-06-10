@@ -146,7 +146,7 @@ void altaReservacion(Reservacion* rs)
           dia llegada:'%s'\n\
           dia partida:'%s'\n\
           numero ninios: %d\n\
-          numreo de adultos: %d\n",
+          numero de adultos: %d\n",
             rs->campoNombreCliente,
             rs->campoLugarReservacion,
             rs->campoDiaLlegada,
