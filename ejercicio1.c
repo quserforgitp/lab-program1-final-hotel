@@ -55,8 +55,8 @@ void pedirDiaPartida(char campoDiaPartida[]); //✅
 void pedirNumeroAdultos(int *campoNumeroAdultos); //✅
 void pedirNumeroNinios(int *campoNumeroNinios); //✅
 void pedirTipoHabitacion(char tipoHabitacion[]); //✅
-void calcularCostoTotalDolares(unsigned int noches,
-                               Suite tipoHabitacion);
+void calcularCostoTotalDolares(unsigned int dias,
+                               Suite tipoHabitacion);//🔨
 void Error(void); //✅
 void salirPrograma(int codigoSalida); //✅
 void eliminarSaltoLinea(char nombreCampo[]); //✅
@@ -213,6 +213,12 @@ void pedirTipoHabitacion(char tipoHabitacion[])
   puts("Dime el tipo de suite que deseas (escribe bien para evitar errores): ");
   fgets(tipoHabitacion,LONGITUD_SUITE,stdin);
   eliminarSaltoLinea(tipoHabitacion);
+}
+
+void calcularCostoTotalDolares(unsigned int dias,
+                               Suite tipoHabitacion)
+{
+  
 }
 
 void eliminarSaltoLinea(char nombreCampo[])
