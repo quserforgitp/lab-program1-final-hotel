@@ -46,7 +46,7 @@ typedef struct {
 void mostrarMenu(void); //✅
 int pedirOpcion(void); //✅
 void altaReservacion(Reservacion* rs); //✅
-void reporteReservacion(void); //🔨
+void reporteReservacion(Reservacion* rs); //✅
 
 //PARA altaReservacion()
 void pedirNombre(char campoNombre[]); //✅
@@ -84,8 +84,7 @@ int main() {
       altaReservacion(&reservacion);
       break;
     case '2':
-      puts("reporteReservacion()");
-      //reporteReservacion();
+      reporteReservacion(&reservacion);
       break;
     case '3':
       puts("saliendo del programa...");
@@ -149,7 +148,7 @@ void altaReservacion(Reservacion* rs)
   
 
   // DEBUG
-  printf("debug nombre:'%s'\n\
+  /* printf("debug nombre:'%s'\n\
           reservacion:'%s'\n\
           dia llegada:'%s'\n\
           dia partida:'%s'\n\
@@ -166,7 +165,7 @@ void altaReservacion(Reservacion* rs)
             rs->campoNumeroAdultos,
             rs->habitacionSelecta.tipoHabitacion,
             dias,
-            rs->campoCostoEstancia);
+            rs->campoCostoEstancia); */
 }
 
 void pedirNombre(char campoNombre[])
@@ -280,6 +279,22 @@ unsigned int calcularDias(char fechaLlegada[],char fechaPartida[])
   unsigned int diferenciaDias = abs((unsigned int)(diferenciaUnix / (60 * 60 * 24)));
 
   return diferenciaDias;
+}
+
+void reporteReservacion(Reservacion *rs)
+{
+  puts("───────────────────────────────────────────");
+  puts("             Reporte de Reservación        ");
+  puts("───────────────────────────────────────────");
+  printf("Nombre del cliente: %s\n", rs->campoNombreCliente);
+  printf("Lugar de reservación: %s\n", rs->campoLugarReservacion);
+  printf("Día de llegada: %s\n", rs->campoDiaLlegada);
+  printf("Día de partida: %s\n", rs->campoDiaPartida);
+  printf("Número de niños: %d\n", rs->campoNumeroNinios);
+  printf("Número de adultos: %d\n", rs->campoNumeroAdultos);
+  printf("Tipo de habitación: %s\n", rs->habitacionSelecta.tipoHabitacion);
+  printf("Costo total de la estancia: %.2f\n", rs->campoCostoEstancia);
+  puts("───────────────────────────────────────────");  
 }
 
 void eliminarSaltoLinea(char nombreCampo[])
