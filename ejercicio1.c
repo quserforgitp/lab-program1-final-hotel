@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define MAX 80
 #define LONGITUD_DIA_LLEGADA 12
@@ -57,6 +58,7 @@ void pedirNumeroNinios(int *campoNumeroNinios); //✅
 void pedirTipoHabitacion(char tipoHabitacion[]); //✅
 void calcularCostoTotalDolares(unsigned int dias,
                                Suite tipoHabitacion);//🔨
+unsigned int calcularDias(char fechaLlegada[],char fechaPartida[]);//🔨
 void Error(void); //✅
 void salirPrograma(int codigoSalida); //✅
 void eliminarSaltoLinea(char nombreCampo[]); //✅
@@ -142,6 +144,7 @@ void altaReservacion(Reservacion* rs)
   pedirNumeroNinios(&(rs->campoNumeroNinios));
   pedirNumeroAdultos(&(rs->campoNumeroAdultos));
   pedirTipoHabitacion(rs->habitacionSelecta.tipoHabitacion);
+  unsigned int dias = calcularDias(rs->campoDiaLlegada,rs->campoDiaPartida);
   // DEBUG
   printf("debug nombre:'%s'\n\
           reservacion:'%s'\n\
@@ -149,14 +152,16 @@ void altaReservacion(Reservacion* rs)
           dia partida:'%s'\n\
           numero ninios:%d\n\
           numero de adultos:%d\n\
-          tipo de habitacion:%s\n",
+          tipo de habitacion:%s\n\
+          dias: %d",
             rs->campoNombreCliente,
             rs->campoLugarReservacion,
             rs->campoDiaLlegada,
             rs->campoDiaPartida,
             rs->campoNumeroNinios,
             rs->campoNumeroAdultos,
-            rs->habitacionSelecta.tipoHabitacion);
+            rs->habitacionSelecta.tipoHabitacion,
+            dias);
 }
 
 void pedirNombre(char campoNombre[])
@@ -218,7 +223,35 @@ void pedirTipoHabitacion(char tipoHabitacion[])
 void calcularCostoTotalDolares(unsigned int dias,
                                Suite tipoHabitacion)
 {
-  
+
+}
+
+unsigned int calcularDias(char fechaLlegada[],char fechaPartida[])
+{
+  // Convertir las fechas a enteros
+  int dia1, mes1, anio1, dia2, mes2, anio2;
+  sscanf(fechaLlegada, "%d/%d/%d", &dia1, &mes1, &anio1);
+  sscanf(fechaPartida, "%d/%d/%d", &dia2, &mes2, &anio2);
+
+  // Calcular la diferencia en días
+  struct tm t1 = {0};
+  struct tm t2 = {0};
+
+  t1.tm_year = anio1 - 1900;
+  t1.tm_mon = mes1 - 1;
+  t1.tm_mday = dia1;
+
+  t2.tm_year = anio2 - 1900;
+  t2.tm_mon = mes2 - 1;
+  t2.tm_mday = dia2;
+
+  time_t fecha1unix = mktime(&t1);
+  time_t fecha2unix = mktime(&t2);
+
+  double diferenciaUnix = difftime(fecha2unix, fecha1unix); // gracias a diosito existe esta funcion :)
+  unsigned int diferenciaDias = abs((unsigned int)(diferenciaUnix / (60 * 60 * 24)));
+
+  return diferenciaDias;
 }
 
 void eliminarSaltoLinea(char nombreCampo[])
