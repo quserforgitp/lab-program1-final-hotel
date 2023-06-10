@@ -19,9 +19,9 @@
 #include <string.h>
 
 #define MAX 80
-#define LONGITUD_DIA_LLEGADA 11
-#define LONGITUD_DIA_PARTIDA 11
-#define LONGITUD_SUITE 13
+#define LONGITUD_DIA_LLEGADA 12
+#define LONGITUD_DIA_PARTIDA 12
+#define LONGITUD_SUITE 15
 
 
 /* Estructuras */
@@ -139,37 +139,40 @@ void altaReservacion(Reservacion* rs)
   pedirLugarReservacion(rs->campoLugarReservacion);
   pedirDiaLlegada(rs->campoDiaLlegada);
   pedirDiaPartida(rs->campoDiaPartida);
-  printf("debug nombre:%s\n\
-          reservacion:%s\n\
-          dia llegada:%s\n\
-          dia partida:%s\n",
+  printf("debug nombre:'%s'\n\
+          reservacion:'%s'\n\
+          dia llegada:'%s'\n\
+          dia partida:'%s'\n",
             rs->campoNombreCliente,
             rs->campoLugarReservacion,
             rs->campoDiaLlegada,
             rs->campoDiaPartida);
-  printf("pintando solo dia llegada%s",rs->campoDiaLlegada);
 }
 
 void pedirNombre(char campoNombre[])
 {
   puts("Dame el nombre y apellidos del cliente:");
-  fgets(campoNombre,MAX-1,stdin);
+  fgets(campoNombre,MAX,stdin);
+  campoNombre[strcspn(campoNombre, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
 }
 
 void pedirLugarReservacion(char campoLugarReservacion[])
 {
   puts("Dame el lugar de la reservacion: ");
-  fgets(campoLugarReservacion,MAX-1,stdin);
+  fgets(campoLugarReservacion,MAX,stdin);
+  campoLugarReservacion[strcspn(campoLugarReservacion, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
 }
 
 void pedirDiaLlegada(char campoDiaLlegada[])
 {
   puts("Dame el dia de llegada en formato dia/mes/anio: ");
-  fgets(campoDiaLlegada,MAX-1,stdin);
+  fgets(campoDiaLlegada,LONGITUD_DIA_LLEGADA,stdin);
+  campoDiaLlegada[strcspn(campoDiaLlegada, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
 }
 
 void pedirDiaPartida(char campoDiaPartida[])
 {
   puts("Dame el dia de partida en formato dia/mes/anio: ");
-  fgets(campoDiaPartida,MAX-1,stdin);
+  fgets(campoDiaPartida,LONGITUD_DIA_PARTIDA,stdin);
+  campoDiaPartida[strcspn(campoDiaPartida, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
 }
