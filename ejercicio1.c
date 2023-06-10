@@ -154,28 +154,28 @@ void pedirNombre(char campoNombre[])
 {
   puts("Dame el nombre y apellidos del cliente:");
   fgets(campoNombre,MAX,stdin);
-  campoNombre[strcspn(campoNombre, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
+  eliminarSaltoLinea(campoNombre);
 }
 
 void pedirLugarReservacion(char campoLugarReservacion[])
 {
   puts("Dame el lugar de la reservacion: ");
   fgets(campoLugarReservacion,MAX,stdin);
-  campoLugarReservacion[strcspn(campoLugarReservacion, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
+  eliminarSaltoLinea(campoLugarReservacion);
 }
 
 void pedirDiaLlegada(char campoDiaLlegada[])
 {
   puts("Dame el dia de llegada en formato dia/mes/anio: ");
   fgets(campoDiaLlegada,LONGITUD_DIA_LLEGADA,stdin);
-  campoDiaLlegada[strcspn(campoDiaLlegada, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
+  eliminarSaltoLinea(campoDiaLlegada);
 }
 
 void pedirDiaPartida(char campoDiaPartida[])
 {
   puts("Dame el dia de partida en formato dia/mes/anio: ");
   fgets(campoDiaPartida,LONGITUD_DIA_PARTIDA,stdin);
-  campoDiaPartida[strcspn(campoDiaPartida, "\n")] = '\0'; // eliminar salto linea -> hacer funcionalidad
+  eliminarSaltoLinea(campoDiaPartida);
 }
 
 void eliminarSaltoLinea(char nombreCampo[])
