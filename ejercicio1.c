@@ -49,7 +49,7 @@ void reporteReservacion(void);
 
 void pedirNombre(char campoNombre[]); //✅
 void pedirLugarReservacion(char campoLugarReservacion[]); //✅
-void pedirDiaLlegada(void);
+void pedirDiaLlegada(char campoDiaLlegada[]); //✅
 void pedirDiaPartida(void);
 void pedirNumeroAdultos(void);
 void pedirNumeroNinios(void);
@@ -133,7 +133,13 @@ void altaReservacion(Reservacion* rs)
   
   pedirNombre(rs->campoNombreCliente);
   pedirLugarReservacion(rs->campoLugarReservacion);
-  printf("debug nombre:%s reservacion:%s\n",rs->campoNombreCliente,rs->campoLugarReservacion);
+  pedirDiaLlegada(rs->campoDiaLlegada);
+  printf("debug nombre:%s\n\
+          reservacion:%s\n\
+          dia llegada:%s\n",
+            rs->campoNombreCliente,
+            rs->campoLugarReservacion,
+            rs->campoDiaLlegada);
 }
 
 void pedirNombre(char campoNombre[])
@@ -147,3 +153,10 @@ void pedirLugarReservacion(char campoLugarReservacion[])
   puts("Dame el lugar de la reservacion: ");
   fgets(campoLugarReservacion,MAX-1,stdin);
 }
+
+void pedirDiaLlegada(char campoDiaLlegada[])
+{
+  puts("Dame el dia de llegada en formato dia/mes/anio: ");
+  fgets(campoDiaLlegada,MAX-1,stdin);
+}
+
