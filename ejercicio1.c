@@ -47,13 +47,14 @@ int pedirOpcion(void); //✅
 void altaReservacion(Reservacion* rs); //🔨
 void reporteReservacion(void);
 
+//PARA altaReservacion()
 void pedirNombre(char campoNombre[]); //✅
 void pedirLugarReservacion(char campoLugarReservacion[]); //✅
 void pedirDiaLlegada(char campoDiaLlegada[]); //✅
 void pedirDiaPartida(char campoDiaPartida[]); //✅
 void pedirNumeroAdultos(int *campoNumeroAdultos); //✅
 void pedirNumeroNinios(int *campoNumeroNinios); //✅
-void pedirTipoHabitacion(void);
+void pedirTipoHabitacion(char tipoHabitacion[]); //✅
 void calcularCostoTotalDolares(unsigned int noches,
                                Suite tipoHabitacion);
 void Error(void); //✅
@@ -140,19 +141,22 @@ void altaReservacion(Reservacion* rs)
   pedirDiaPartida(rs->campoDiaPartida);
   pedirNumeroNinios(&(rs->campoNumeroNinios));
   pedirNumeroAdultos(&(rs->campoNumeroAdultos));
+  pedirTipoHabitacion(rs->habitacionSelecta.tipoHabitacion);
   // DEBUG
   printf("debug nombre:'%s'\n\
           reservacion:'%s'\n\
           dia llegada:'%s'\n\
           dia partida:'%s'\n\
-          numero ninios: %d\n\
-          numero de adultos: %d\n",
+          numero ninios:%d\n\
+          numero de adultos:%d\n\
+          tipo de habitacion:%s\n",
             rs->campoNombreCliente,
             rs->campoLugarReservacion,
             rs->campoDiaLlegada,
             rs->campoDiaPartida,
             rs->campoNumeroNinios,
-            rs->campoNumeroAdultos);
+            rs->campoNumeroAdultos,
+            rs->habitacionSelecta.tipoHabitacion);
 }
 
 void pedirNombre(char campoNombre[])
@@ -197,8 +201,23 @@ void pedirNumeroAdultos(int *campoNumeroAdultos)
   getchar();//consumir salto de linea
 }
 
+void pedirTipoHabitacion(char tipoHabitacion[])
+{
+  puts("╔═══════════════════════════╗");
+  puts("║      TIPOS DE SUITE       ║");
+  puts("╠═══════════════════════════╣");
+  puts("║    master suite... $100   ║");
+  puts("║    Junior suite... $75.95 ║");
+  puts("║    economica...... $50.5  ║");
+  puts("╚═══════════════════════════╝");
+  puts("Dime el tipo de suite que deseas (escribe bien para evitar errores): ");
+  fgets(tipoHabitacion,LONGITUD_SUITE,stdin);
+  eliminarSaltoLinea(tipoHabitacion);
+}
+
 void eliminarSaltoLinea(char nombreCampo[])
 {
   nombreCampo[strcspn(nombreCampo, "\n")] = '\0';
 }
+
 
