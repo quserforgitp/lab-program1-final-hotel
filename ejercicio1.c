@@ -7,7 +7,7 @@
   Dia de partida(dia/mes/anio)
   Numero de personas que se hospedan
   Tipo de habitacion (master suite, junior suite, economica)
-  Costo por dia en dolares(ms=100,js=7.95,e=50.5)
+  Costo por dia en dolares(ms=100,js=75.95,e=50.5)
   Costo total de la estancia en dolares
 
   estructura RESERVACION
@@ -38,7 +38,7 @@ typedef struct {
   char campoDiaPartida[LONGITUD_DIA_PARTIDA];
   unsigned int campoNumeroNinios;
   unsigned int campoNumeroAdultos;
-  unsigned int campoCostoEstancia;
+  float campoCostoEstancia;
   Suite habitacionSelecta;
 } Reservacion;
 
@@ -56,7 +56,7 @@ void pedirDiaPartida(char campoDiaPartida[]); //✅
 void pedirNumeroAdultos(int *campoNumeroAdultos); //✅
 void pedirNumeroNinios(int *campoNumeroNinios); //✅
 void pedirTipoHabitacion(char tipoHabitacion[]); //✅
-void calcularCostoTotalDolares(unsigned int dias,
+float calcularCostoTotalDolares(unsigned int dias,
                                Suite tipoHabitacion);//🔨
 unsigned int calcularDias(char fechaLlegada[],char fechaPartida[]);//✅
 void Error(void); //✅
@@ -145,6 +145,9 @@ void altaReservacion(Reservacion* rs)
   pedirNumeroAdultos(&(rs->campoNumeroAdultos));
   pedirTipoHabitacion(rs->habitacionSelecta.tipoHabitacion);
   unsigned int dias = calcularDias(rs->campoDiaLlegada,rs->campoDiaPartida);
+  rs->campoCostoEstancia = calcularCostoTotalDolares(dias,rs->habitacionSelecta);
+  
+
   // DEBUG
   printf("debug nombre:'%s'\n\
           reservacion:'%s'\n\
@@ -153,7 +156,8 @@ void altaReservacion(Reservacion* rs)
           numero ninios:%d\n\
           numero de adultos:%d\n\
           tipo de habitacion:%s\n\
-          dias: %d",
+          dias: %d\n\
+          costo estancia: %.2f\n",
             rs->campoNombreCliente,
             rs->campoLugarReservacion,
             rs->campoDiaLlegada,
@@ -161,7 +165,8 @@ void altaReservacion(Reservacion* rs)
             rs->campoNumeroNinios,
             rs->campoNumeroAdultos,
             rs->habitacionSelecta.tipoHabitacion,
-            dias);
+            dias,
+            rs->campoCostoEstancia);
 }
 
 void pedirNombre(char campoNombre[])
@@ -220,10 +225,33 @@ void pedirTipoHabitacion(char tipoHabitacion[])
   eliminarSaltoLinea(tipoHabitacion);
 }
 
-void calcularCostoTotalDolares(unsigned int dias,
+float calcularCostoTotalDolares(unsigned int dias,
                                Suite tipoHabitacion)
 {
+  /* Precios:
+     master suite -> 100
+     Junior suite -> 75.95
+     economica -> 50.5
+   */
+  //DETERMINAR PRECIO
+  float precio = 0;
+  char juniorSuiteString[50] = "Junior suite";
+  char masterSuiteString[50] = "master suite";
+  char economicaSuiteString[20] = "economica";
+  /* IMPORTANTE -> RECUERDA DQUE strcmp() devuelve 0 si las cadenas son iguales ;( */
+  if (strcmp(masterSuiteString,tipoHabitacion.tipoHabitacion) == 0){
+    precio = 100;
+  } else if(strcmp(juniorSuiteString,tipoHabitacion.tipoHabitacion) == 0){
+    precio = 75.95;
+  } else if(strcmp(economicaSuiteString,tipoHabitacion.tipoHabitacion) == 0){
+    precio = 50.5;
+  }
 
+    // debug precio
+    printf("suite: %s\nprecio:%.2f", tipoHabitacion.tipoHabitacion,precio);
+    getchar();
+
+    return precio*dias;
 }
 
 unsigned int calcularDias(char fechaLlegada[],char fechaPartida[])
