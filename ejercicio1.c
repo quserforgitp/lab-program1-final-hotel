@@ -51,7 +51,7 @@ void pedirNombre(char campoNombre[]); //✅
 void pedirLugarReservacion(char campoLugarReservacion[]); //✅
 void pedirDiaLlegada(char campoDiaLlegada[]); //✅
 void pedirDiaPartida(char campoDiaPartida[]); //✅
-void pedirNumeroAdultos(void);
+void pedirNumeroAdultos(int *campoNumeroAdultos); //🔨
 void pedirNumeroNinios(int *campoNumeroNinios); //✅
 void pedirTipoHabitacion(void);
 void calcularCostoTotalDolares(unsigned int noches,
@@ -144,12 +144,14 @@ void altaReservacion(Reservacion* rs)
           reservacion:'%s'\n\
           dia llegada:'%s'\n\
           dia partida:'%s'\n\
-          numero ninios: %d\n",
+          numero ninios: %d\n\
+          numreo de adultos: %d",
             rs->campoNombreCliente,
             rs->campoLugarReservacion,
             rs->campoDiaLlegada,
             rs->campoDiaPartida,
-            rs->campoNumeroNinios);
+            rs->campoNumeroNinios,
+            rs->campoNumeroAdultos);
 }
 
 void pedirNombre(char campoNombre[])
@@ -184,6 +186,13 @@ void pedirNumeroNinios(int *campoNumeroNinios)
 {
   puts("Dame el numero de ninios que se van a hospedar: ");
   scanf("%d", campoNumeroNinios);
+  getchar();//consumir salto de linea
+}
+
+void pedirNumeroAdultos(int *campoNumeroAdultos)
+{
+  puts("Dame el numero de Adultos que se van a hospedar: ");
+  scanf("%d", campoNumeroAdultos);
   getchar();//consumir salto de linea
 }
 
